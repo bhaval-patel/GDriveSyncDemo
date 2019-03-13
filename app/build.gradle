@@ -1,0 +1,65 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.spaceo.gdrivesyncdemo"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "androidx.appcompat:appcompat:1.0.2"
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation "com.google.android.gms:play-services-auth:16.0.1"
+    implementation 'com.google.http-client:google-http-client-gson:1.26.0'
+    implementation('com.google.api-client:google-api-client-android:1.26.0')
+    implementation('com.google.apis:google-api-services-drive:v3-rev136-1.25.0') {
+        exclude group: 'com.google.guava'
+    }
+}
+
+configurations.all {
+    resolutionStrategy {
+
+        force 'com.google.code.gson:gson:2.8.0'
+        force 'com.squareup.okhttp3:okhttp:3.9.1'
+
+        eachDependency {
+            DependencyResolveDetails details ->
+                if (details.requested.group == 'com.android.support') {
+                    if (!requested.name.startsWith("multidex")) {
+                        details.useVersion "27.1.1"
+                    }
+                }
+        }
+    }
+}
