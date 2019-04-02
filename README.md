@@ -30,4 +30,4 @@
 7. Now Create Credentials from APIs & Services -> Credentials -> Create credentials -> Create OAuth client ID (refer step8.png, step9.png)
 8. just copy Client ID & Client Secret and paste to string.xml file (refer step10.png)
 
-For more information in detail, you can also refer this step-by-step guide for Google Drive Auto-sync demo (https://www.spaceotechnologies.com/auto-sync-google-drive-android-app/).
+For more information in detail, you can also refer this step-by-step guide for Google Drive Auto-sync demo[https://www.spaceotechnologies.com/auto-sync-google-drive-android-app/].
